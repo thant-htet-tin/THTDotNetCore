@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using THT.ConsoleApp.AdoDotNetExamples;
+using THT.ConsoleApp.DapperExamples;
 
 Console.WriteLine("Hello, World!");
 
@@ -56,8 +57,11 @@ Console.WriteLine("Hello, World!");
 //    Console.WriteLine("------------------");
 //}
 
-AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
-adoDotNetExample.Run();
+//AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
+//adoDotNetExample.Run();
+
+DapperExample dapperDotNetExample = new DapperExample();
+dapperDotNetExample.Run();
 
 Console.ReadKey();
 
