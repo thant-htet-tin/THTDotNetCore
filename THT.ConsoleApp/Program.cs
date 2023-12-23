@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using THT.ConsoleApp.AdoDotNetExamples;
 using THT.ConsoleApp.DapperExamples;
+using THT.ConsoleApp.EFCoreExamples;
 
 Console.WriteLine("Hello, World!");
 
@@ -60,8 +61,11 @@ Console.WriteLine("Hello, World!");
 //AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
 //adoDotNetExample.Run();
 
-DapperExample dapperDotNetExample = new DapperExample();
-dapperDotNetExample.Run();
+//DapperExample dapperDotNetExample = new DapperExample();
+//dapperDotNetExample.Run();
+
+EFCoreExample efCoreExample = new EFCoreExample();
+efCoreExample.Run();
 
 Console.ReadKey();
 
