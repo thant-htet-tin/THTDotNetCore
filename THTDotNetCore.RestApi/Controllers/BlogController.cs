@@ -34,20 +34,20 @@ namespace THTDotNetCore.RestApi.Controllers
             int rowCount = _appDbContext.Blogs.Count();
             int pageCount = rowCount / pageSize;
 
-            if(rowCount % pageSize > 0)
+            if (rowCount % pageSize > 0)
             {
                 pageCount++;
             }
 
             return Ok(
                 new
-            {   
-                IsEndOfPage = pageNo >= pageCount,
-                PageCount = pageCount,
-                pageNo = pageNo,
-                pageSize = pageSize,
-                data = lst
-            });
+                {
+                    IsEndOfPage = pageNo >= pageCount,
+                    PageCount = pageCount,
+                    pageNo = pageNo,
+                    pageSize = pageSize,
+                    data = lst
+                });
         }
 
         [HttpGet("{id}")]
@@ -64,27 +64,104 @@ namespace THTDotNetCore.RestApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateBlog()
+        public IActionResult CreateBlog(BlogDataModel blog)
         {
-            return Ok("Post");
+            _appDbContext.Blogs.Add(blog);
+            int result = _appDbContext.SaveChanges();
+
+            string message = result > 0 ? "Saving Successful" : "Saving Failed";
+
+            return Ok(message);
         }
 
-        [HttpPut]
-        public IActionResult UpdateBlog()
+        [HttpPut("{id}")]
+        public IActionResult UpdateBlog(int id, BlogDataModel blog)
         {
-            return Ok("Put");
+            BlogDataModel? item = _appDbContext.Blogs.FirstOrDefault(x => x.BlogId == id);
+
+            if (item is null)
+            {
+                return NotFound("No data found");
+            }
+                        
+            if (string.IsNullOrEmpty(blog.BlogTitle))
+            {
+                return BadRequest("Blog Title is Required");
+            }
+
+            if (string.IsNullOrEmpty(blog.BlogAuthor))
+            {
+                return BadRequest("Blog Author is Required");
+            }
+
+            if (string.IsNullOrEmpty(blog.BlogContent))
+            {
+                return BadRequest("Blog Content is Required");
+            }
+
+
+            item.BlogTitle = blog.BlogTitle;
+            item.BlogAuthor = blog.BlogAuthor;
+            item.BlogContent = blog.BlogContent;
+
+            int result = _appDbContext.SaveChanges();
+
+            string message = result > 0 ? "Update Successful" : "Update Failed";
+
+            return Ok(message);
         }
 
-        [HttpPatch]
-        public IActionResult PatchBlog()
+        [HttpPatch("{id}")]
+        public IActionResult PatchBlog(int id, BlogDataModel blog)
         {
-            return Ok("Patch");
+            BlogDataModel? item = _appDbContext.Blogs.FirstOrDefault(x => x.BlogId == id);
+
+            if (item is null)
+            {
+                return NotFound("No data found");
+            }
+
+            if (!string.IsNullOrEmpty(blog.BlogTitle))
+            {
+                item.BlogTitle = blog.BlogTitle;
+            }
+
+            if(!string.IsNullOrEmpty(blog.BlogAuthor))
+            {
+                item.BlogAuthor = blog.BlogAuthor;
+            }
+
+            if (!string.IsNullOrEmpty(blog.BlogContent))
+            {
+                item.BlogContent = blog.BlogContent;
+            }
+            
+            
+
+            int result = _appDbContext.SaveChanges();
+
+            string message = result > 0 ? "Update Successful" : "Update Failed";
+
+            return Ok(message);
         }
 
-        [HttpDelete]
-        public IActionResult DeleteBlog()
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBlog(int id)
         {
-            return Ok("Delete");
+            BlogDataModel? item = _appDbContext.Blogs.FirstOrDefault(x => x.BlogId == id);
+
+            if (item is null)
+            {
+                return NotFound("No data found");
+            }
+
+            _appDbContext.Blogs.Remove(item);
+
+            int result = _appDbContext.SaveChanges();
+
+            string message = result > 0 ? "Delete Successful" : "Delete Failed";
+
+            return Ok(message);
         }
     }
 }
