@@ -23,10 +23,10 @@ namespace THT.ConsoleApp.DapperExamples
         //    Password = "thargyi"
         //};
 
-        private readonly SqlConnectionStringBuilder sqlConnectionStringBuilder;
+        private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder;
         public DapperExample()
         {
-            sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
+            _sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
             {
                 DataSource = ".",
                 InitialCatalog = "THARGYI",
@@ -55,7 +55,7 @@ namespace THT.ConsoleApp.DapperExamples
           ,[BlogContent]
       FROM [dbo].[Tbl_Blog]
     ";
-            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             List<BlogDataModel> lst = db.Query<BlogDataModel>(query).ToList();
             foreach (BlogDataModel item in lst)
             {
@@ -80,7 +80,7 @@ namespace THT.ConsoleApp.DapperExamples
           ,[BlogContent]
       FROM [dbo].[Tbl_Blog] WHERE BlogId= @BlogId
     ";
-            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             BlogDataModel? item = db.Query<BlogDataModel>(query, new BlogDataModel { BlogId = id }).FirstOrDefault();
             //if(item == null)
             if (item is null)
@@ -120,7 +120,7 @@ namespace THT.ConsoleApp.DapperExamples
                 BlogContent = content,
             };
 
-            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             int result = db.Execute(query, blog);
 
             string message = result > 0 ? "Saving Successful" : "Saving Failed";
@@ -145,7 +145,7 @@ namespace THT.ConsoleApp.DapperExamples
                 BlogContent = content,
             };
 
-            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             int result = db.Execute(query, blog);
 
             string message = result > 0 ? "Update Successful" : "Update Failed";
@@ -162,7 +162,7 @@ namespace THT.ConsoleApp.DapperExamples
                 BlogId = id,             
             };
 
-            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             int result = db.Execute(query, blog);
 
             string message = result > 0 ? "Delete Successful" : "Delete Failed";
