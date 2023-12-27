@@ -5,9 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using THT.ConsoleApp.Models;
+using THTDotNetCore.ConsoleApp.Models;
 
-namespace THT.ConsoleApp.EFCoreExamples
+namespace THTDotNetCore.ConsoleApp.EFCoreExamples
 {
     public class AppDbContext:DbContext
     {

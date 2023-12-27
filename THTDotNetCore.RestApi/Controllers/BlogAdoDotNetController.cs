@@ -27,7 +27,7 @@ namespace THTDotNetCore.RestApi.Controllers
         {
 
             SqlConnection connection = new(_sqlConnectionStringBuilder.ConnectionString);
-            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+           
             connection.Open();
 
             string query = @"
@@ -66,7 +66,7 @@ namespace THTDotNetCore.RestApi.Controllers
         {
 
             SqlConnection connection = new(_sqlConnectionStringBuilder.ConnectionString);
-            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+           
             connection.Open();
 
             string query = $@"
@@ -109,7 +109,7 @@ namespace THTDotNetCore.RestApi.Controllers
         {
 
             SqlConnection connection = new(_sqlConnectionStringBuilder.ConnectionString);
-            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            
             connection.Open();
 
             string query = @"INSERT INTO [dbo].[Tbl_Blog]
@@ -143,7 +143,7 @@ namespace THTDotNetCore.RestApi.Controllers
         {
 
             SqlConnection connection = new(_sqlConnectionStringBuilder.ConnectionString);
-            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+       
             connection.Open();
 
             string query = $@"
@@ -161,30 +161,31 @@ namespace THTDotNetCore.RestApi.Controllers
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
 
+            connection.Close();
 
             if (dt.Rows.Count == 0)
             {
                 return NotFound("No data found.");
             }
 
-            DataRow dr = dt.Rows[0];
-            var item = new BlogDataModel
-            {
-                BlogId = (int)dr["blogId"],
-                BlogAuthor = dr["BlogAuthor"].ToString(),
-                BlogTitle = dr["BlogTitle"].ToString(),
-                BlogContent = dr["BlogContent"].ToString()
-            };
+            //DataRow dr = dt.Rows[0];
+            //var item = new BlogDataModel
+            //{
+            //    BlogId = (int)dr["blogId"],
+            //    BlogAuthor = dr["BlogAuthor"].ToString(),
+            //    BlogTitle = dr["BlogTitle"].ToString(),
+            //    BlogContent = dr["BlogContent"].ToString()
+            //};
 
-            command.Parameters.AddWithValue("@BlogId", id);
-            command.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
-            command.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
-            command.Parameters.AddWithValue("@BlogContent", blog.BlogContent);
+            //command.Parameters.AddWithValue("@BlogId", id);
+            //command.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
+            //command.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
+            //command.Parameters.AddWithValue("@BlogContent", blog.BlogContent);
 
-            if (item is null)
-            {
-                return NotFound("No data found");
-            }
+            //if (item is null)
+            //{
+            //    return NotFound("No data found");
+            //}
 
             if (string.IsNullOrEmpty(blog.BlogTitle))
             {
@@ -200,6 +201,8 @@ namespace THTDotNetCore.RestApi.Controllers
             {
                 return BadRequest("Blog Content is Required");
             }
+
+            connection.Open();
 
             string Updatequery = @"UPDATE [dbo].[Tbl_Blog]
    SET [BlogTitle] = @BlogTitle
@@ -227,7 +230,6 @@ namespace THTDotNetCore.RestApi.Controllers
         public IActionResult PatchBlog(int id, BlogDataModel blog)
         {
             SqlConnection connection = new(_sqlConnectionStringBuilder.ConnectionString);
-            using IDbConnection db = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             connection.Open();
 
             string query = $@"
@@ -245,25 +247,26 @@ namespace THTDotNetCore.RestApi.Controllers
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
 
+            connection.Close();
 
             if (dt.Rows.Count == 0)
             {
                 return NotFound("No data found.");
             }
 
-            DataRow dr = dt.Rows[0];
-            var item = new BlogDataModel
-            {
-                BlogId = (int)dr["blogId"],
-                BlogAuthor = dr["BlogAuthor"].ToString(),
-                BlogTitle = dr["BlogTitle"].ToString(),
-                BlogContent = dr["BlogContent"].ToString()
-            };
+            //DataRow dr = dt.Rows[0];
+            //var item = new BlogDataModel
+            //{
+            //    BlogId = (int)dr["blogId"],
+            //    BlogAuthor = dr["BlogAuthor"].ToString(),
+            //    BlogTitle = dr["BlogTitle"].ToString(),
+            //    BlogContent = dr["BlogContent"].ToString()
+            //};
 
-            command.Parameters.AddWithValue("@BlogId", id);
-            command.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
-            command.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
-            command.Parameters.AddWithValue("@BlogContent", blog.BlogContent);
+            //command.Parameters.AddWithValue("@BlogId", id);
+            //command.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
+            //command.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
+            //command.Parameters.AddWithValue("@BlogContent", blog.BlogContent);
             string conditions = string.Empty;
 
             if (!string.IsNullOrEmpty(blog.BlogTitle))
@@ -289,6 +292,8 @@ namespace THTDotNetCore.RestApi.Controllers
             conditions = conditions.Substring(0, conditions.Length - 2);
 
             blog.BlogId = id;
+
+            connection.Open();
 
             string queryUpdate = $@"UPDATE [dbo].[Tbl_Blog]
    SET {conditions}

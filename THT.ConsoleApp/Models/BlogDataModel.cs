@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace THT.ConsoleApp.Models
+namespace THTDotNetCore.ConsoleApp.Models
 {
     [Table("Tbl_Blog")]
     public class BlogDataModel
