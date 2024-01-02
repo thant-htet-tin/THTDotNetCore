@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using THT.ConsoleApp.AdoDotNetExamples;
-using THT.ConsoleApp.DapperExamples;
-using THT.ConsoleApp.EFCoreExamples;
+using THTDotNetCore.ConsoleApp.AdoDotNetExamples;
+using THTDotNetCore.ConsoleApp.DapperExamples;
+using THTDotNetCore.ConsoleApp.EFCoreExamples;
+using THTDotNetCore.ConsoleApp.HttpClientExamples;
+using THTDotNetCore.ConsoleApp.RestClientExamples;
 
 Console.WriteLine("Hello, World!");
 
@@ -64,8 +66,14 @@ Console.WriteLine("Hello, World!");
 //DapperExample dapperDotNetExample = new DapperExample();
 //dapperDotNetExample.Run();
 
-EFCoreExample efCoreExample = new EFCoreExample();
-efCoreExample.Run();
+//EFCoreExample efCoreExample = new EFCoreExample();
+//efCoreExample.Run();
+
+//HttpClientExample httpClientExample = new HttpClientExample();
+//await httpClientExample.Run();
+
+RestClientExample example = new RestClientExample();
+await example.Run();
 
 Console.ReadKey();
 
