@@ -17,5 +17,9 @@ namespace THTDotNetCore.ConsoleApp.Models
         public string? BlogAuthor { get; set; }
         public string? BlogContent { get; set; }
 
+        public static implicit operator string(BlogDataModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,6 +6,7 @@ using THTDotNetCore.ConsoleApp.AdoDotNetExamples;
 using THTDotNetCore.ConsoleApp.DapperExamples;
 using THTDotNetCore.ConsoleApp.EFCoreExamples;
 using THTDotNetCore.ConsoleApp.HttpClientExamples;
+using THTDotNetCore.ConsoleApp.RefitExamples;
 using THTDotNetCore.ConsoleApp.RestClientExamples;
 
 Console.WriteLine("Hello, World!");
@@ -72,7 +73,13 @@ Console.WriteLine("Hello, World!");
 //HttpClientExample httpClientExample = new HttpClientExample();
 //await httpClientExample.Run();
 
-RestClientExample example = new RestClientExample();
+//RestClientExample example = new RestClientExample();
+//await example.Run();
+
+Console.WriteLine("Please wait for api...");
+Console.ReadKey();
+
+RefitExample example = new RefitExample();
 await example.Run();
 
 Console.ReadKey();
