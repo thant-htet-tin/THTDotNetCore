@@ -1,0 +1,40 @@
+﻿@model List<LoginDataModel>
+
+@{
+    ViewData["Title"] = "User Page";
+    int count = 0;
+}
+
+<a href="/User/register" class="btn btn-success">Register</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Actions</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Email</th>
+            <th scope="col">FullName</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(LoginDataModel item in Model)
+        {
+            <tr>
+                <th scope="row">@{++count;}</th>
+                <td>
+                    <a href="/User/Edit/@item.UserId" class="btn btn-warning">Edit</a>
+                    <a href="/User/Delete/@item.UserId" class="btn btn-danger">Delete</a>
+                    <a href="/User/Test/@item.UserId" class="btn btn-danger">Delete</a>
+
+                </td>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>@item.FullName</td>
+                <td>@item.Role</td>
+            </tr>
+        }
+        
+    </tbody>
+</table>

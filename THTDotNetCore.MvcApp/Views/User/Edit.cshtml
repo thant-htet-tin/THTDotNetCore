@@ -1,0 +1,28 @@
+﻿@model LoginDataModel
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<form method="post" action="/User/Update/@Model.UserId">
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">User Name</label>
+        <input type="text" class="form-control" name="UserName" value="@Model.UserName" placeholder="Username...">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <input type="email" class="form-control" name="Email" value="@Model.Email" placeholder="name@example.com">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+        <input type="text" class="form-control" name="FullName" value="@Model.FullName" placeholder="name...">
+    </div>
+
+
+    <a href="/User" class="btn btn-dark">Cancel</a>
+    <button type="submit" class="btn btn-success">Update</button>
+
+</form>

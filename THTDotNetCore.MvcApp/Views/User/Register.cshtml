@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<form method="post" action="/User/Save">
+
+
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">User Name</label>
+        <input type="text" class="form-control" name="UserName" placeholder="Username...">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <input type="email" class="form-control" name="Email" placeholder="name@example.com">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Password</label>
+        <input type="password" class="form-control" name="Password" placeholder="password...">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+        <input type="text" class="form-control" name="FullName" placeholder="name...">
+    </div>
+
+    <select class="form-select" name="Role" aria-label="Default select example">
+        <option selected>Select Your role</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+    </select>
+
+    <a href="/User" class="btn btn-dark">Cancel</a>
+    <button type="submit" class="btn btn-success">register</button>
+
+</form>
+
