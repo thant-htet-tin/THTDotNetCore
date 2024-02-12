@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">User Name</label>
+    <input type="text" class="form-control" name="userName" id="userName" placeholder="Username...">
+</div>
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+</div>
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="password...">
+</div>
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+    <input type="text" class="form-control" name="fullName" id="fullname" placeholder="Fullname...">
+</div>
+
+<select class="form-select" name="role" id="role" aria-label="Default select example">
+    <option selected>Select Your role</option>
+    <option value="Admin">Admin</option>
+    <option value="User">User</option>
+</select>
+
+<a href="/User" class="btn btn-dark">Cancel</a>
+<button type="button" id="btnSave" class="btn btn-success">register</button>
+
+@section scripts {
+    <script>
+        $("#btnSave").click(function (e) {
+
+            let userName = $("#userName").val();
+            let email = $("#email").val();
+            let password = $("#password").val();
+            let fullName = $("#fullname").val();
+            let role = $("#role").val();
+
+
+            var requestModel = {
+                UserName : userName,
+                Email : email,
+                Password : password,
+                FullName : fullName,
+                Role : role
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Save", "UserAjax")',
+                data: {
+                    requestModel: requestModel
+                },
+                dataType: "json",
+                // contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    window.location.href = "/UserAjax"
+                },
+                error: function (ex) {
+                    // var r = jQuery.parseJSon(response.responseText);
+                    // alert("Message: " + r.Message);
+                    // alert("StackTrace: " + r.StackTrace);
+                    // alert("ExceptionType: " + r.ExceptionType);
+                    console.log(ex)
+                }
+            });
+        })
+    </script>
+}

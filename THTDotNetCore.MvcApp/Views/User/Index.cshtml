@@ -22,7 +22,7 @@
         @foreach(LoginDataModel item in Model)
         {
             <tr>
-                <th scope="row">@{++count;}</th>
+                <th scope="row">@(++count)</th>
                 <td>
                     <a href="/User/Edit/@item.UserId" class="btn btn-warning">Edit</a>
                     <a href="/User/Delete/@item.UserId" class="btn btn-danger">Delete</a>

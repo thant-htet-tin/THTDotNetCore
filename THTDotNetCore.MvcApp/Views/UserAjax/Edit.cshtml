@@ -1,0 +1,67 @@
+﻿@model LoginDataModel
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">User Name</label>
+    <input type="text" class="form-control" name="UserName" id="userName" value="@Model.UserName" placeholder="Username...">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1"  class="form-label">Email address</label>
+    <input type="email" class="form-control" name="Email" id="email" value="@Model.Email" placeholder="name@example.com">
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+    <input type="text" class="form-control" name="FullName" id="fullname" value="@Model.FullName" placeholder="name...">
+    </div>
+
+
+    <a href="/User" class="btn btn-dark">Cancel</a>
+    <button type="button" id="btnUpdate" class="btn btn-success">Update</button>
+
+
+@section scripts {
+    <script>
+        $("#btnUpdate").click(function (e) {
+
+            let userName = $("#userName").val();
+            let email = $("#email").val();
+            let fullName = $("#fullname").val();
+
+
+
+            var requestModel = {
+                UserName: userName,
+                Email: email,
+                FullName: fullName,
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: '/UserAjax/Update/@Model.UserId',
+                data: {
+                    requestModel: requestModel
+                },
+                dataType: "json",
+                // contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    window.location.href = "/UserAjax"
+                },
+                error: function (ex) {
+                    // var r = jQuery.parseJSon(response.responseText);
+                    // alert("Message: " + r.Message);
+                    // alert("StackTrace: " + r.StackTrace);
+                    // alert("ExceptionType: " + r.ExceptionType);
+                    console.log(ex)
+                }
+            });
+        })
+    </script>
+}

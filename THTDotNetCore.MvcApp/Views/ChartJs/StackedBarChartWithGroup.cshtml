@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model ChartJsModel
+
+@{
+    ViewData["Title"] = "Stacked Bar Chart With Group Page";
+    var _labels = Model.labels;
+    var _datasets = Model.datasets;
+    
+}
+
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@section scripts{
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        const DATA_COUNT = 7;
+        const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
+
+
+
+        const _labels = @(Html.Raw(JsonConvert.SerializeObject(_labels)));
+        const _datasets = @(Html.Raw(JsonConvert.SerializeObject(_datasets)))
+
+        const data = {
+            labels: _labels,
+            datasets: _datasets
+        };
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart - Stacked'
+                    },
+                },
+                responsive: true,
+                interaction: {
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    </script>
+}
+
+ 
