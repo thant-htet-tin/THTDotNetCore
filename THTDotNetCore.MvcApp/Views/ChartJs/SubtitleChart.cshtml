@@ -5,10 +5,10 @@
 @model ChartJsModel
 
 @{
-    ViewData["Title"] = "Stacked Bar Chart With Group Page";
+    ViewData["Title"] = "Subtitle Chart Page";
     var _labels = Model.labels;
     var _datasets = Model.datasets;
-    
+
 }
 
 
@@ -16,7 +16,7 @@
     <canvas id="myChart"></canvas>
 </div>
 
-@section scripts{
+@section scripts {
     <script>
         const ctx = document.getElementById('myChart');
 
@@ -25,36 +25,40 @@
         const _labels = @(Html.Raw(JsonConvert.SerializeObject(_labels)));
         const _datasets = @(Html.Raw(JsonConvert.SerializeObject(_datasets)))
 
-        const data = {
+                const data = {
             labels: _labels,
             datasets: _datasets
         };
 
-        new Chart(ctx, {
-            type: 'bar',
+        const config = {
+            type: 'line',
             data: data,
             options: {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Chart.js Bar Chart - Stacked'
+                        text: 'Chart Title',
                     },
-                },
-                responsive: true,
-                interaction: {
-                    intersect: false,
-                },
-                scales: {
-                    x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true
+                    subtitle: {
+                        display: true,
+                        text: 'Chart Subtitle',
+                        color: 'blue',
+                        font: {
+                            size: 12,
+                            family: 'tahoma',
+                            weight: 'normal',
+                            style: 'italic'
+                        },
+                        padding: {
+                            bottom: 10
+                        }
                     }
                 }
             }
-        });
+        };
+
+        new Chart(ctx, config);
     </script>
 }
 
- 
+

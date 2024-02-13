@@ -26,13 +26,13 @@ namespace THTDotNetCore.MvcApp.Controllers
 
             var model = new ChartJsModel
             {
-                        labels = months,
-                        datasets = new List<datasetsModel>()
+                labels = months,
+                datasets = new List<datasetsModel>()
                 {
                      new datasetsModel
                      {
                         label = "Dataset 1",
-                        data = new[] { 19, 29, 28, 59, 24, 28, 85 }, 
+                        data = new[] { 19, 29, 28, 59, 24, 28, 85 },
                         backgroundColor = "rgb(255, 99, 132)",
                         stack = "Stack 0"
                      },
@@ -56,6 +56,43 @@ namespace THTDotNetCore.MvcApp.Controllers
 
 
             return View(model);
+        }
+
+        public IActionResult SubtitleChart()
+        {
+            string[] months = new string[]
+             {
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+             };
+
+            var model = new ChartJsModel
+            {
+                labels = months,
+                datasets = new List<datasetsModel>()
+                {
+                     new datasetsModel
+                     {
+                        label = "Dataset 1",
+                        data = new[] { 19, 29, 28, 59, 24, 28, 85 },
+                        backgroundColor = "rgb(255, 99, 132)",
+                        fill = false
+                     }
+                }
+            };
+            return View(model);
+        }
+
+
     }
-}
 }
