@@ -61,5 +61,55 @@ namespace THTDotNetCore.MvcApp.Controllers
 
             return View(model);
         }
+
+        public IActionResult StackedAndGroupedColumn()
+        {
+            var model = new HighChartModel()
+            {
+                //name = "Board",
+                stackedData = new List<StackedData>
+                {
+                    new StackedData
+                    {
+                        name = "Norway",
+                        data = new List<int>()
+                        {
+                            148, 133, 124
+                        },
+                        stack = "Europe"
+
+                    },
+                    new StackedData
+                    {
+                        name = "Germany",
+                        data = new List<int>()
+                        {
+                            102, 98, 65
+                        },
+                        stack = "Europe"
+
+                    },new StackedData
+                    {
+                        name = "United States",
+                        data = new List<int>()
+                        {
+                            113, 122, 95
+                        },
+                        stack = "North America"
+
+                    },new StackedData
+                    {
+                        name = "Canada",
+                        data = new List<int>()
+                        {
+                            77, 72, 80
+                        },
+                        stack = "North America"
+
+                    },
+                }
+            };
+            return View(model);
+        }
     }
 }
